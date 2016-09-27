@@ -1,0 +1,19 @@
+%p#notice= notice
+%p
+  %strong Name:
+  = @plan.name
+%p
+  %strong Stripe key:
+  = @plan.stripe_key
+%p
+  %strong Price:
+  = @plan.price
+%p
+  %strong Interval:
+  = @plan.interval
+%p
+  %strong Description:
+  = @plan.description
+= link_to 'Edit', edit_plan_path(@plan)
+|
+= link_to 'Back', plans_path

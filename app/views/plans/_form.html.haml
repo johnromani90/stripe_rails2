@@ -1,0 +1,26 @@
+= form_for(plan) do |f|
+  - if plan.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(plan.errors.count, "error")
+        prohibited this plan from being saved:
+      %ul
+        - plan.errors.full_messages.each do |message|
+          %li= message
+  .field
+    = f.label :name
+    = f.text_field :name
+  .field
+    = f.label :stripe_key
+    = f.text_field :stripe_key
+  .field
+    = f.label :price
+    = f.text_field :price
+  .field
+    = f.label :interval
+    = f.number_field :interval
+  .field
+    = f.label :description
+    = f.text_area :description
+  .actions
+    = f.submit
