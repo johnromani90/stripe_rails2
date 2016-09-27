@@ -5,6 +5,7 @@ require File.expand_path('../../config/environment', __FILE__)
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 require 'spec_helper'
 require 'rspec/rails'
+require 'stripe_mock'
 # Add additional requires below this line. Rails is not loaded until this point!
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
@@ -29,6 +30,10 @@ ActiveRecord::Migration.maintain_test_schema!
 RSpec.configure do |config|
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
+  if config.filter_manager.inclusions.rules.include?(:live)
+    StripeMock.toggle_live(true)
+    puts "Running **live** tests against Stripe..."
+  end
 
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
@@ -54,13 +59,4 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
-end
-
-VCR.configure do |config|
-  config.cassette_library_dir = 'spec/support/cassettes'
-  config.hook_into :webmock
-  config.configure_rspec_metadata!
-  config.ignore_hosts "127.0.0.1"
-  config.default_cassette_options = { record: :new_episodes }
-  config.allow_http_connections_when_no_cassette = false
 end

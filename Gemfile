@@ -40,7 +40,6 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'factory_girl_rails'
   gem 'capybara'
-  gem 'vcr'
   gem 'webmock'
   gem 'dotenv-rails'
   gem 'stripe-ruby-mock', '~> 2.3.1'
