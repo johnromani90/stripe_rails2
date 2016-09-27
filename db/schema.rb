@@ -16,13 +16,14 @@ ActiveRecord::Schema.define(version: 20160927143210) do
   enable_extension "plpgsql"
 
   create_table "plans", force: :cascade do |t|
-    t.string   "name"
-    t.string   "stripe_key"
-    t.decimal  "price"
-    t.integer  "interval"
+    t.string   "name",        null: false
+    t.string   "stripe_key",  null: false
+    t.decimal  "price",       null: false
+    t.integer  "interval_id", null: false
     t.text     "description"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.index ["name"], name: "index_plans_on_name", unique: true, using: :btree
   end
 
 end

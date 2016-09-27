@@ -30,7 +30,9 @@ gem 'turbolinks', '~> 5'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
 gem 'haml-rails'
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -38,6 +40,10 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'factory_girl_rails'
   gem 'capybara'
+  gem 'vcr'
+  gem 'webmock'
+  gem 'dotenv-rails'
+  gem 'stripe-ruby-mock', '~> 2.3.1'
 end
 
 group :development do
