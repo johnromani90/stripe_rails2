@@ -29,7 +29,5 @@ class Plan < ApplicationRecord
 
   def self.retrieve_stripe_plan(id)
     stripe_plan = Stripe::Plan.retrieve(id: id)
-  rescue
-    raise
   end
 end

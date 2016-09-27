@@ -1,0 +1,18 @@
+%p#notice= notice
+
+%p
+  %b Plan:
+  = @subscription.plan_id
+%p
+  %b User:
+  = @subscription.user_id
+%p
+  %b Stripe key:
+  = @subscription.stripe_key
+%p
+  %b Status:
+  = @subscription.status_id
+
+= link_to 'Edit', edit_subscription_path(@subscription)
+\|
+= link_to 'Back', subscriptions_path
