@@ -4,13 +4,22 @@ RSpec.describe Subscription, type: :model do
   context 'exists in stripe' do
     before :each do
       StripeMock.start
-      @subscription = FactoryGirl.create(:subscription)
+      @plan = FactoryGirl.create(:plan)
+      @user = FactoryGirl.create(:valid_card_user, selected_plan_id: @plan.id)
+      @user.add_to_stripe
+      @user.subscribe
     end
 
     after { StripeMock.stop }
 
-    it 'deletes from stripe' do
+    it 'matches our users subscription stripe key', :live do
+      expect(Subscription.retrieve_stripe_subscription(@user.subscription.stripe_key).id).to eq @user.subscription.stripe_key
+    end
 
+    it 'deletes from stripe' do
+      local_subscription = @user.subscription
+      local_subscription.destroy
+      expect{Subscription.retrieve_stripe_subscription(local_subscription.stripe_key)}.to raise_error(Stripe::InvalidRequestError)
     end
   end
 
