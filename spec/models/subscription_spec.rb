@@ -19,7 +19,7 @@ RSpec.describe Subscription, type: :model do
     it 'deletes from stripe' do
       local_subscription = @user.subscription
       local_subscription.destroy
-      expect{Subscription.retrieve_stripe_subscription(local_subscription.stripe_key)}.to raise_error(Stripe::InvalidRequestError)
+      expect(Subscription.retrieve_stripe_subscription(local_subscription.stripe_key).status).to eq 'canceled'
     end
   end
 
