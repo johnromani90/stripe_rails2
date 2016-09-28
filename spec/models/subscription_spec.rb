@@ -30,13 +30,11 @@ RSpec.describe Subscription, type: :model do
     after { StripeMock.stop }
 
     it 'adds to stripe' do
-      @user = FactoryGirl.create(:user)
+      @user = FactoryGirl.create(:valid_card_user)
       @user.add_to_stripe
       subscription  = FactoryGirl.create(:subscription, user: @user)
-      subscription.add_to_stripe
       last_subscription = Subscription.retrieve_stripe_subscriptions(1).first
-      expect(last_subscription.id).to eq @subscription.stripe_key
+      expect(last_subscription.id).to eq subscription.stripe_key
     end
-
   end
 end
