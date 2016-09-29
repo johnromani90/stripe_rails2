@@ -43,6 +43,7 @@ group :development, :test do
   gem 'webmock'
   gem 'dotenv-rails'
   gem 'stripe-ruby-mock', '~> 2.3.1'
+  gem 'stripe_rails', path: '~/Projects/ror/stripe_rails'
 end
 
 group :development do
