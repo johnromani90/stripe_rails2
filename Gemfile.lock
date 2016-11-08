@@ -8,9 +8,6 @@ GIT
 PATH
   remote: ~/Projects/ror/stripe_rails
   specs:
-    stripe_rails (0.1.0)
-      rails (~> 5.0.0, >= 5.0.0.1)
-      stripe
 
 GEM
   remote: https://rubygems.org/
